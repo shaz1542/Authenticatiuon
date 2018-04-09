@@ -5,6 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AuthLayer.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data;
+using System.Data.Common;
 
 namespace AuthLayer.Controllers
 {
@@ -33,5 +37,28 @@ namespace AuthLayer.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public void CreateUser(string UserName, string Password)//CreateUser_Click
+        {
+            UserName = "shaz";
+            Password = "test";
+
+            var userStore = new UserStore<IdentityUser>();
+            var manager = new UserManager<IdentityUser>(userStore);
+
+            var user = new IdentityUser() { UserName = UserName };
+            IdentityResult result = manager.Create(user, Password);
+
+            if (result.Succeeded)
+            {
+                //StatusMessage.Text = string.Format("User {0} was created successfully!", user.UserName);
+            }
+            else
+            {
+                //StatusMessage.Text = result.Errors.FirstOrDefault();
+            }
+            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
     }
 }

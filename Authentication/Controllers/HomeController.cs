@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Authentication.Controllers
 {
-    [AllowAnonymous]
+    
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -17,7 +17,7 @@ namespace Authentication.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ContactManagers")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -25,6 +25,7 @@ namespace Authentication.Controllers
             return View();
         }
 
+        [Authorize(Roles = "ContactAdministrators")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

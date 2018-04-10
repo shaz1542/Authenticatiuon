@@ -104,10 +104,12 @@ namespace Authentication
             services.AddTransient<IEmailSender, EmailSender>();
             
             services.AddMvc(config=>{
+                /*
                 var policy = new AuthorizationPolicyBuilder()
                          .RequireAuthenticatedUser()
                          .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
+                */
             });
             
                 // Authorization handlers.
